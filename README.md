@@ -20,7 +20,7 @@ hardhat:
   volumes: 
     - ./hardhat:/app
     - /app/node_modules
-    - ./<PATH_TO_FRONTEND_DIR>/contracts:/app/deployments
+    - ./<PATH_TO_FRONTEND_DIR>/contracts:/app/tmp/contracts
   ports:
     - 8545:8545
 ```
@@ -30,6 +30,8 @@ Once the service has been started with `docker-compose up` you contracts will be
 When contracts are compiled and deployed the output files are saved to `/deployments/<network>` in the hardhat container. Mounting this folder to a volume in the service as we did above with `- ./<PATH_TO_FRONTEND_DIR>/contracts:/app/deployments` means that these contracts will then be available in your frontend directory under `/contracts`.
 
 ## Deployment
+First add your credentials to the `.env.example` file and rename to `.env`.
+
 To deploy to networks other than localhost you can run commands like:
 ```bash
 docker-compose run hardhat mainnet:deploy
